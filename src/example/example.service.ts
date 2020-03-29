@@ -5,7 +5,12 @@ import { Example } from './example.entity';
 
 @Injectable()
 export class ExampleService {
-  constructor(@InjectRepository(Example) repo: Repository<Example>) {}
+  constructor(
+    @InjectRepository(Example) private readonly repo: Repository<Example>,
+  ) {}
 
-  async;
+  async createOne(dto: any): Promise<any> {
+    const created = await this.repo.create(dto);
+    return this.repo.save(created);
+  }
 }
